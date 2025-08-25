@@ -1,105 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Anniversary 💖</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Anniversary 💖</title>
+<style>
+  :root{
+    --pink:#ff7aa2; --rose:#ff4d7a; --bg1:#0f1020; --glass:rgba(255,255,255,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+  body{color:#fff;background:linear-gradient(135deg,#1b1b2f,#1f4068 30%,#2b5876)}
 
-    /* floating hearts animation */
-    .heart {
-      position: absolute;
-      color: rgba(255, 0, 102, 0.6);
-      font-size: 24px;
-      animation: floatUp 6s linear infinite;
-    }
+  /* ---------- FRONT COVER ---------- */
+  .cover{
+    position:relative;min-height:100dvh;display:grid;place-items:center;overflow:hidden;
+    background:#222;
+  }
+  /* Background image (replace file name with your image) */
+  .cover::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.6)),
+      url('bg-anime.jpg') center/cover no-repeat;
+    /* Fallback if bg-anime.jpg not uploaded yet */
+    background-blend-mode:overlay;
+    filter:saturate(1.05) contrast(1.02);
+  }
+  .hearts{position:absolute;inset:0;pointer-events:none}
+  .heart{position:absolute;opacity:.0;animation:float 8s linear infinite}
+  @keyframes float{
+    0%{transform:translateY(110%) scale(.6);opacity:0}
+    15%{opacity:.8}
+    85%{opacity:.8}
+    100%{transform:translateY(-20%) scale(1.15);opacity:0}
+  }
 
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-    }
+  .glass{
+    position:relative;z-index:1;
+    width:min(92vw,680px);
+    padding:28px 24px 22px;border-radius:22px;
+    background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.06));
+    backdrop-filter:blur(8px);
+    box-shadow:0 8px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.3);
+    text-align:center;
+    border:1px solid rgba(255,255,255,.25);
+    animation:pop .8s ease-out both;
+  }
+  @keyframes pop{from{transform:translateY(10px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+  .title{font-size:clamp(22px,4.8vw,36px);margin:0 0 4px;color:#ffd2e0;letter-spacing:.5px}
+  .sub{font-size:clamp(14px,3.6vw,18px);line-height:1.6;margin:6px 0 18px;color:#ffe9f1}
+  .cta{
+    display:inline-block;border:0;border-radius:999px;
+    padding:12px 20px;font-weight:700;letter-spacing:.2px;
+    background:linear-gradient(45deg,var(--rose),var(--pink));
+    color:#fff;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease, filter .2s;
+    box-shadow:0 10px 24px rgba(255,90,140,.45);
+  }
+  .cta:hover{transform:translateY(-1px) scale(1.03);filter:brightness(1.05)}
+  .cta:active{transform:translateY(0) scale(.98)}
 
-    .box {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
-      max-width: 400px;
-      animation: fadeIn 2s ease-in-out;
-    }
+  /* ---------- INSIDE APP ---------- */
+  .app{display:none;min-height:100dvh;background:linear-gradient(180deg,#1a1b2e,#182235 40%,#13202b)}
+  .container{max-width:1000px;margin:0 auto;padding:18px 16px 60px}
+  h2{margin:18px 0 10px;font-size:clamp(20px,4.2vw,28px);color:#ffd6e3}
+  p.lead{color:#ffeef5;margin:4px 0 16px}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
+  .card{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
+    border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.28);
+  }
 
-    h1 {
-      font-size: 28px;
-      color: #d63384;
-      margin-bottom: 20px;
-    }
+  /* Puzzle */
+  .options{display:grid;gap:10px;margin-top:12px}
+  .opt{
+    padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.08);color:#fff;cursor:pointer;text-align:center;
+    transition:transform .12s ease, background .2s ease;
+  }
+  .opt:hover{transform:translateY(-1px);background:rgba(255,255,255,.12)}
+  .locknote{color:#b8f9ff;margin-top:10px;display:none}
 
-    p {
-      font-size: 18px;
-      color: #444;
-      margin-bottom: 25px;
-    }
+  /* Surprise Grid */
+  .grid{display:grid;gap:14px;margin-top:14px}
+  @media (min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .surprise{
+    position:relative;min-height:200px;border-radius:16px;overflow:hidden;
+    background:linear-gradient(135deg,#ffb3c6,#ffd6e0);
+    color:#5a1846;display:flex;align-items:center;justify-content:center;text-align:center;
+    box-shadow:0 8px 22px rgba(255,122,162,.25);
+    cursor:pointer;transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .surprise:hover{transform:translateY(-2px);filter:brightness(1.03)}
+  .surprise .hint{padding:14px 12px;font-weight:700}
+  .revealed{background:#000}
+  .revealed img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
+  .revealed .caption{
+    position:absolute;left:10px;bottom:10px;
+    background:rgba(0,0,0,.45);color:#fff;padding:6px 10px;border-radius:10px;font-size:14px
+  }
 
-    button {
-      background: linear-gradient(45deg, #ff758c, #ff7eb3);
-      border: none;
-      padding: 12px 20px;
-      font-size: 18px;
-      border-radius: 30px;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+  /* Letter + Voice */
+  textarea{
+    width:100%;min-height:160px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.08);color:#fff;resize:vertical;outline:none
+  }
+  .row{display:grid;gap:14px}
+  @media (min-width:900px){.row{grid-template-columns:1fr 1fr}}
+  .btn{
+    display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;border:0;
+    background:linear-gradient(45deg,var(--pink),#ffa0c0);color:#181828;font-weight:700;cursor:pointer
+  }
+  .btn:disabled{opacity:.6;cursor:not-allowed}
 
-    button:hover {
-      transform: scale(1.1);
-      background: linear-gradient(45deg, #ff7eb3, #ff758c);
-    }
-  </style>
+  /* Footer Celebrate */
+  .center{text-align:center;margin-top:18px}
+  .tiny{font-size:12px;opacity:.75}
+
+  /* Fireworks (emoji confetti) */
+  .boom{position:fixed;inset:0;pointer-events:none;z-index:999}
+  .spark{
+    position:absolute;animation:fall 2.6s ease-in forwards;font-size:18px;will-change:transform,opacity
+  }
+  @keyframes fall{
+    from{transform:translateY(-20vh) rotate(0);opacity:1}
+    to{transform:translateY(105vh) rotate(460deg);opacity:0}
+  }
+</style>
 </head>
 <body>
-  <div class="box">
-    <h1>Happy Anniversary 💖</h1>
-    <p>To unlock Urmi’s heart 💖, just pause for a second…<br>
-    close your eyes and feel her love wrapping around you forever.</p>
-    <button onclick="openSurprise()">✨ Click to Open Surprise ✨</button>
+
+<!-- ========== FRONT COVER ========== -->
+<section class="cover" id="cover">
+  <div class="hearts" id="hearts"></div>
+
+  <div class="glass">
+    <h1 class="title">Happy Anniversary 💖</h1>
+    <p class="sub">
+      To unlock Urmi’s heart 💖, just pause for a second…<br/>
+      close your eyes and feel her love wrapping around you forever.
+    </p>
+    <button class="cta" onclick="enterApp()">✨ Click to Open Surprise ✨</button>
+    <div style="margin-top:8px" class="tiny">(Tip: best with sound ON 🔊)</div>
+  </div>
+</section>
+
+<!-- ========== INSIDE APP ========== -->
+<main class="app" id="app">
+  <div class="container">
+
+    <!-- Puzzle Gate -->
+    <section class="card" id="puzzle">
+      <h2>🧩 Little Puzzle</h2>
+      <p class="lead">Where did we first meet? (Demo question – later we’ll use your real one)</p>
+      <div class="options">
+        <div class="opt" onclick="checkAnswer(0)">City Park</div>
+        <div class="opt" onclick="checkAnswer(1)">Café Aurora ☕ (Correct)</div>
+        <div class="opt" onclick="checkAnswer(2)">College Library</div>
+      </div>
+      <div id="pmsg" class="locknote">💡 Pick the right one to unlock surprises!</div>
+    </section>
+
+    <!-- Surprises Grid (locked until puzzle correct) -->
+    <section class="card" id="surprises" style="display:none">
+      <h2>🎁 Surprises</h2>
+      <p class="lead">Each box has a little note. Tap to reveal the memory.</p>
+
+      <div class="grid">
+        <!-- 1 -->
+        <div class="surprise" data-img="memory1.jpeg" onclick="reveal(this,'Smile first… itna to banta hai, Rahul! 😍')">
+          <div class="hint">😊 Smile first…</div>
+        </div>
+        <!-- 2 -->
+        <div class="surprise" data-img="memory2.jpeg" onclick="reveal(this,'Hold my hand and tap ❤️')">
+          <div class="hint">🤝 Hold my hand…</div>
+        </div>
+        <!-- 3 -->
+        <div class="surprise" data-img="memory3.jpeg" onclick="reveal(this,'Take a deep breath… it’s us, always ✨')">
+          <div class="hint">🌬️ Deep breath…</div>
+        </div>
+        <!-- 4 -->
+        <div class="surprise" data-img="memory4.jpeg" onclick="reveal(this,'Shhh… a little secret just for you 💌')">
+          <div class="hint">🤫 A tiny secret…</div>
+        </div>
+        <!-- 5 -->
+        <div class="surprise" data-img="memory5.jpeg" onclick="reveal(this,'Ready for a happy tear? 🥹')">
+          <div class="hint">🥹 A happy tear?</div>
+        </div>
+        <!-- 6 -->
+        <div class="surprise" data-img="memory6.jpeg" onclick="reveal(this,'This is what forever looks like 💞')">
+          <div class="hint">♾️ Forever…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Letter + Voice -->
+    <section class="row" id="lovebits" style="display:none">
+      <div class="card">
+        <h2>💌 Ek Khat Tumhare Naam</h2>
+        <p class="lead">Demo letter – later we’ll replace with your real letter.</p>
+        <textarea id="letter">Rahul,
+Thank you for being my safe place, my smile, my forever. Every day with you feels like home. — Urmi ❤️
+        </textarea>
+        <button class="btn" onclick="saveLetter()">Save Letter (local)</button>
+        <div class="tiny">Auto-saves in your browser only (localStorage).</div>
+      </div>
+
+      <div class="card">
+        <h2>🎧 Apke liye kuch meri awaaz me</h2>
+        <p class="lead">Click play. (Replace file later with your real voice: <b>voice.mp3</b>)</p>
+        <audio id="voice" controls src="voice.mp3" onerror="voiceMissing()"></audio>
+        <button class="btn" onclick="playVoice()">Play Now</button>
+        <div id="vmsg" class="tiny"></div>
+      </div>
+    </section>
+
+    <!-- Our Special Memory (Rahul writes) -->
+    <section class="card" id="ours" style="display:none">
+      <h2>🌸 Our Special Memory</h2>
+      <p class="lead">Urmi will write a line… and Rahul, you add yours below and save it 💖</p>
+      <div class="row">
+        <div>
+          <div class="tiny">Urmi’s line (demo)</div>
+          <div class="card" style="padding:12px">“The way you look at me when I laugh — that’s my favourite moment.”</div>
+        </div>
+        <div>
+          <div class="tiny">Rahul, your line</div>
+          <textarea id="rahulNote" placeholder="Write your favourite memory here…"></textarea>
+          <button class="btn" onclick="saveRahul()">Save Rahul’s Note</button>
+          <div class="tiny">Saved locally. You can edit anytime.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="center" id="celebrate" style="display:none">
+      <button class="cta" onclick="fireworks()">🎆 Celebrate Us 🎆</button>
+      <div class="tiny" style="margin-top:8px">Happy Anniversary, Forever Yours — Urmi ❤️</div>
+    </div>
+
   </div>
 
-  <!-- Floating hearts -->
-  <script>
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (20 + Math.random() * 30) + "px";
-      heart.innerText = "💖";
-      document.body.appendChild(heart);
+  <div class="boom" id="boom"></div>
+</main>
 
-      setTimeout(() => heart.remove(), 6000);
-    }
-    setInterval(createHeart, 700);
+<script>
+  /* Floating hearts on cover */
+  const heartsEl = document.getElementById('hearts');
+  const emojis = ["💖","💞","💗","💘","💓","💕"];
+  function spawnHeart(){
+    const h=document.createElement('div');
+    h.className='heart';
+    h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    h.style.left=Math.random()*100+'%';
+    h.style.fontSize=(18+Math.random()*26)+'px';
+    h.style.animationDelay=(Math.random()*3)+'s';
+    heartsEl.appendChild(h);
+    setTimeout(()=>h.remove(),9000);
+  }
+  setInterval(spawnHeart,500);
 
-    function openSurprise() {
-      alert("🎉 Surprise Page Coming Soon 🎉\n(Yeh hum kal customize karenge with memories, puzzles & notes)");
+  /* Enter app */
+  function enterApp(){
+    document.getElementById('cover').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('pmsg').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  /* Puzzle gate (correct index = 1) */
+  let unlocked=false;
+  function checkAnswer(i){
+    const msg=document.getElementById('pmsg');
+    if(i===1){
+      unlocked=true;
+      msg.textContent='✅ Correct! Surprises unlocked below.';
+      msg.style.color='#b6ffce';
+      document.getElementById('surprises').style.display='block';
+      document.getElementById('lovebits').style.display='grid';
+      document.getElementById('ours').style.display='block';
+      document.getElementById('celebrate').style.display='block';
+      setTimeout(()=>document.getElementById('surprises').scrollIntoView({behavior:'smooth'}),250);
+    }else{
+      msg.textContent='❌ Not this one, try again 💫';
+      msg.style.color='#ffd1d1';
     }
-  </script>
+  }
+
+  /* Reveal a memory box */
+  function reveal(el, caption){
+    const imgSrc = el.getAttribute('data-img');
+    el.classList.add('revealed');
+    el.innerHTML = '';
+    const img = new Image();
+    img.onload = ()=>{ el.appendChild(img); addCap(); };
+    img.onerror = ()=>{
+      // If image missing, show a soft fallback
+      el.style.background='linear-gradient(135deg,#222,#444)';
+      el.style.color='#fff';
+      el.innerHTML = "<div style='padding:14px'>📷 (Upload "+imgSrc+" to your repo to see this memory)</div>";
+      addCap();
+    };
+    img.src = imgSrc;
+    function addCap(){
+      const c=document.createElement('div');
+      c.className='caption';
+      c.textContent=caption;
+      el.appendChild(c);
+    }
+  }
+
+  /* Letter & Notes local save */
+  const LETTER_KEY='urmi_letter_v1';
+  const RAHUL_KEY='rahul_note_v1';
+  const letterEl=document.getElementById('letter');
+  const rahulEl=document.getElementById('rahulNote');
+  if(localStorage.getItem(LETTER_KEY)) letterEl.value=localStorage.getItem(LETTER_KEY);
+  if(localStorage.getItem(RAHUL_KEY)) rahulEl.value=localStorage.getItem(RAHUL_KEY);
+  function saveLetter(){ localStorage.setItem(LETTER_KEY, letterEl.value); alert('💌 Letter saved locally!'); }
+  function saveRahul(){ localStorage.setItem(RAHUL_KEY, rahulEl.value); alert('📝 Rahul’s note saved!'); }
+
+  /* Voice */
+  function playVoice(){ const v=document.getElementById('voice'); v.play(); }
+  function voiceMissing(){ document.getElementById('vmsg').textContent='(voice.mp3 not found yet — upload later)'; }
+
+  /* Fireworks (emoji confetti) */
+  function fireworks(){
+    const boom=document.getElementById('boom');
+    for(let i=0;i<80;i++){
+      const s=document.createElement('div');
+      s.className='spark';
+      s.style.left=(Math.random()*100)+'vw';
+      s.style.top=(-10-Math.random()*40)+'vh';
+      s.style.fontSize=(14+Math.random()*18)+'px';
+      s.textContent = Math.random()>.5 ? '🎆' : (Math.random()>.5 ? '✨' : '💖');
+      s.style.animationDuration=(2+Math.random()*2)+'s';
+      boom.appendChild(s);
+      setTimeout(()=>s.remove(),3500);
+    }
+  }
+</script>
 </body>
 </html>
