@@ -4,71 +4,66 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Happy Anniversary 💖</title>
+<meta name="theme-color" content="#ff7aa2">
 <style>
-  :root{
-    --pink:#ff7aa2; --rose:#ff4d7a; --bg1:#0f1020; --glass:rgba(255,255,255,.14);
-  }
+  :root{--pink:#ff7aa2;--rose:#ff4d7a}
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
   body{color:#fff;background:linear-gradient(135deg,#1b1b2f,#1f4068 30%,#2b5876)}
+  a{color:#ffd6e3}
 
   /* ---------- FRONT COVER ---------- */
-  .cover{
-    position:relative;min-height:100dvh;display:grid;place-items:center;overflow:hidden;
-    background:#222;
-  }
-  /* Background image (replace file name with your image) */
+  .cover{position:relative;min-height:100dvh;display:grid;place-items:center;overflow:hidden}
   .cover::before{
     content:"";position:absolute;inset:0;z-index:0;
     background:
       linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.6)),
       url('bg-anime.jpg') center/cover no-repeat;
-    /* Fallback if bg-anime.jpg not uploaded yet */
-    background-blend-mode:overlay;
-    filter:saturate(1.05) contrast(1.02);
+    background-blend-mode:overlay;filter:saturate(1.05) contrast(1.02);
   }
   .hearts{position:absolute;inset:0;pointer-events:none}
   .heart{position:absolute;opacity:.0;animation:float 8s linear infinite}
   @keyframes float{
     0%{transform:translateY(110%) scale(.6);opacity:0}
-    15%{opacity:.8}
-    85%{opacity:.8}
+    15%{opacity:.85}
+    85%{opacity:.85}
     100%{transform:translateY(-20%) scale(1.15);opacity:0}
   }
-
   .glass{
-    position:relative;z-index:1;
-    width:min(92vw,680px);
-    padding:28px 24px 22px;border-radius:22px;
+    position:relative;z-index:1;width:min(92vw,720px);
+    padding:28px 24px 22px;border-radius:22px;text-align:center;
     background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.06));
     backdrop-filter:blur(8px);
-    box-shadow:0 8px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.3);
-    text-align:center;
     border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 8px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.3);
     animation:pop .8s ease-out both;
   }
   @keyframes pop{from{transform:translateY(10px) scale(.98);opacity:0}to{transform:none;opacity:1}}
-  .title{font-size:clamp(22px,4.8vw,36px);margin:0 0 4px;color:#ffd2e0;letter-spacing:.5px}
-  .sub{font-size:clamp(14px,3.6vw,18px);line-height:1.6;margin:6px 0 18px;color:#ffe9f1}
+  .title{font-size:clamp(22px,5vw,38px);margin:0 0 6px;color:#ffd2e0;letter-spacing:.4px}
+  .sub{font-size:clamp(14px,3.6vw,18px);line-height:1.6;margin:8px 0 18px;color:#ffe9f1}
   .cta{
-    display:inline-block;border:0;border-radius:999px;
-    padding:12px 20px;font-weight:700;letter-spacing:.2px;
+    display:inline-block;border:0;border-radius:999px;padding:12px 20px;font-weight:700;
     background:linear-gradient(45deg,var(--rose),var(--pink));
-    color:#fff;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease, filter .2s;
-    box-shadow:0 10px 24px rgba(255,90,140,.45);
+    color:#fff;cursor:pointer;transition:transform .15s ease,filter .2s;box-shadow:0 10px 24px rgba(255,90,140,.45)
   }
   .cta:hover{transform:translateY(-1px) scale(1.03);filter:brightness(1.05)}
-  .cta:active{transform:translateY(0) scale(.98)}
 
   /* ---------- INSIDE APP ---------- */
   .app{display:none;min-height:100dvh;background:linear-gradient(180deg,#1a1b2e,#182235 40%,#13202b)}
-  .container{max-width:1000px;margin:0 auto;padding:18px 16px 60px}
-  h2{margin:18px 0 10px;font-size:clamp(20px,4.2vw,28px);color:#ffd6e3}
-  p.lead{color:#ffeef5;margin:4px 0 16px}
-
+  .container{max-width:1020px;margin:0 auto;padding:16px 14px 70px}
+  h2{margin:18px 0 8px;font-size:clamp(20px,4.2vw,28px);color:#ffd6e3}
+  p.lead{color:#ffeef5;margin:4px 0 14px}
   .card{
     background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
-    border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.28);
+    border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.28);margin-top:12px
+  }
+
+  /* Top bar (music) */
+  .topbar{position:sticky;top:0;z-index:5;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);
+    padding:8px 12px;display:flex;gap:8px;align-items:center;border-bottom:1px solid rgba(255,255,255,.12)}
+  .pill{
+    border-radius:999px;border:1px solid rgba(255,255,255,.25);padding:8px 12px;background:rgba(255,255,255,.08);
+    color:#fff;cursor:pointer;font-weight:700
   }
 
   /* Puzzle */
@@ -89,43 +84,35 @@
     background:linear-gradient(135deg,#ffb3c6,#ffd6e0);
     color:#5a1846;display:flex;align-items:center;justify-content:center;text-align:center;
     box-shadow:0 8px 22px rgba(255,122,162,.25);
-    cursor:pointer;transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+    cursor:pointer;transition:transform .15s ease, filter .2s ease;
   }
   .surprise:hover{transform:translateY(-2px);filter:brightness(1.03)}
   .surprise .hint{padding:14px 12px;font-weight:700}
   .revealed{background:#000}
   .revealed img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
   .revealed .caption{
-    position:absolute;left:10px;bottom:10px;
-    background:rgba(0,0,0,.45);color:#fff;padding:6px 10px;border-radius:10px;font-size:14px
+    position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.45);
+    color:#fff;padding:6px 10px;border-radius:10px;font-size:14px
   }
 
-  /* Letter + Voice */
   textarea{
     width:100%;min-height:160px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
     background:rgba(255,255,255,.08);color:#fff;resize:vertical;outline:none
   }
   .row{display:grid;gap:14px}
   @media (min-width:900px){.row{grid-template-columns:1fr 1fr}}
-  .btn{
-    display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;border:0;
-    background:linear-gradient(45deg,var(--pink),#ffa0c0);color:#181828;font-weight:700;cursor:pointer
-  }
+
+  .btn{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;border:0;
+    background:linear-gradient(45deg,#ff8fb8,#ffd1e1);color:#181828;font-weight:800;cursor:pointer}
   .btn:disabled{opacity:.6;cursor:not-allowed}
 
-  /* Footer Celebrate */
   .center{text-align:center;margin-top:18px}
   .tiny{font-size:12px;opacity:.75}
 
-  /* Fireworks (emoji confetti) */
+  /* Fireworks / confetti */
   .boom{position:fixed;inset:0;pointer-events:none;z-index:999}
-  .spark{
-    position:absolute;animation:fall 2.6s ease-in forwards;font-size:18px;will-change:transform,opacity
-  }
-  @keyframes fall{
-    from{transform:translateY(-20vh) rotate(0);opacity:1}
-    to{transform:translateY(105vh) rotate(460deg);opacity:0}
-  }
+  .spark{position:absolute;animation:fall 2.6s ease-in forwards;font-size:18px}
+  @keyframes fall{from{transform:translateY(-20vh) rotate(0);opacity:1}to{transform:translateY(105vh) rotate(460deg);opacity:0}}
 </style>
 </head>
 <body>
@@ -133,7 +120,6 @@
 <!-- ========== FRONT COVER ========== -->
 <section class="cover" id="cover">
   <div class="hearts" id="hearts"></div>
-
   <div class="glass">
     <h1 class="title">Happy Anniversary 💖</h1>
     <p class="sub">
@@ -141,18 +127,23 @@
       close your eyes and feel her love wrapping around you forever.
     </p>
     <button class="cta" onclick="enterApp()">✨ Click to Open Surprise ✨</button>
-    <div style="margin-top:8px" class="tiny">(Tip: best with sound ON 🔊)</div>
+    <div class="tiny" style="margin-top:8px">Best with sound ON 🔊</div>
   </div>
 </section>
 
 <!-- ========== INSIDE APP ========== -->
 <main class="app" id="app">
+  <div class="topbar">
+    <button id="musicBtn" class="pill" onclick="toggleMusic()">▶️ Play Music</button>
+    <div class="tiny">Soft romantic instrumental will loop</div>
+  </div>
+
   <div class="container">
 
-    <!-- Puzzle Gate -->
+    <!-- Puzzle -->
     <section class="card" id="puzzle">
       <h2>🧩 Little Puzzle</h2>
-      <p class="lead">Where did we first meet? (Demo question – later we’ll use your real one)</p>
+      <p class="lead">Where did we first meet? (demo)</p>
       <div class="options">
         <div class="opt" onclick="checkAnswer(0)">City Park</div>
         <div class="opt" onclick="checkAnswer(1)">Café Aurora ☕ (Correct)</div>
@@ -161,35 +152,51 @@
       <div id="pmsg" class="locknote">💡 Pick the right one to unlock surprises!</div>
     </section>
 
-    <!-- Surprises Grid (locked until puzzle correct) -->
+    <!-- Surprises Grid -->
     <section class="card" id="surprises" style="display:none">
       <h2>🎁 Surprises</h2>
       <p class="lead">Each box has a little note. Tap to reveal the memory.</p>
 
-      <div class="grid">
-        <!-- 1 -->
-        <div class="surprise" data-img="memory1.jpeg" onclick="reveal(this,'Smile first… itna to banta hai, Rahul! 😍')">
-          <div class="hint">😊 Smile first…</div>
+      <div class="grid" id="grid">
+        <div class="surprise" data-img="memory1.jpeg" onclick="reveal(this,'Smile first… itna to banta hai, Rahul! 😍')"><div class="hint">😊 Smile first…</div></div>
+        <div class="surprise" data-img="memory2.jpeg" onclick="reveal(this,'Hold my hand and tap ❤️')"><div class="hint">🤝 Hold my hand…</div></div>
+        <div class="surprise" data-img="memory3.jpeg" onclick="reveal(this,'Take a deep breath… it’s us, always ✨')"><div class="hint">🌬️ Deep breath…</div></div>
+        <div class="surprise" data-img="memory4.jpeg" onclick="reveal(this,'Shhh… a little secret just for you 💌')"><div class="hint">🤫 A tiny secret…</div></div>
+        <div class="surprise" data-img="memory5.jpeg" onclick="reveal(this,'Ready for a happy tear? 🥹')"><div class="hint">🥹 A happy tear?</div></div>
+        <div class="surprise" data-img="memory6.jpeg" onclick="reveal(this,'This is what forever looks like 💞')"><div class="hint">♾️ Forever…</div></div>
+      </div>
+      <div class="tiny">Tip: upload your real images as memory1.jpeg … memory6.jpeg</div>
+    </section>
+
+    <!-- Gift Level (QR + Barcode + Code) -->
+    <section class="card" id="gift" style="display:none">
+      <h2>🎁 Secret Gift for You</h2>
+      <p class="lead">Scan this to see your surprise gift online. (Demo: men’s watch ~₹1,499)</p>
+      <div class="center" style="display:grid;place-items:center;gap:10px">
+        <!-- QR generated (change the URL inside data= to update gift) -->
+        <img id="qr" alt="Gift QR" width="220" height="220"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fwww.amazon.in%2Fdp%2FB09N3YY84V%2F" />
+        <!-- Barcode (code128) for the same secret number -->
+        <img id="barcode" alt="Parcel Code Barcode" height="60"
+          src="https://bwipjs-api.metafloor.com/?bcid=code128&text=143&scale=3&includetext" />
+        <div class="tiny">Parcel Secret Code: <b>#143</b> (write this on the physical note/gift)</div>
+        <button class="btn" onclick="openGift()">Open Gift Link</button>
+      </div>
+    </section>
+
+    <!-- Code Verify -->
+    <section class="card" id="codegate" style="display:none">
+      <h2>🔐 Unlock the Final Surprise</h2>
+      <p class="lead">Enter the <b>secret code</b> you found with the gift QR/Barcode.</p>
+      <div class="row">
+        <div>
+          <input id="codeInput" type="tel" inputmode="numeric" pattern="[0-9]*"
+                 placeholder="Enter code (e.g., 143)"
+                 style="width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;">
         </div>
-        <!-- 2 -->
-        <div class="surprise" data-img="memory2.jpeg" onclick="reveal(this,'Hold my hand and tap ❤️')">
-          <div class="hint">🤝 Hold my hand…</div>
-        </div>
-        <!-- 3 -->
-        <div class="surprise" data-img="memory3.jpeg" onclick="reveal(this,'Take a deep breath… it’s us, always ✨')">
-          <div class="hint">🌬️ Deep breath…</div>
-        </div>
-        <!-- 4 -->
-        <div class="surprise" data-img="memory4.jpeg" onclick="reveal(this,'Shhh… a little secret just for you 💌')">
-          <div class="hint">🤫 A tiny secret…</div>
-        </div>
-        <!-- 5 -->
-        <div class="surprise" data-img="memory5.jpeg" onclick="reveal(this,'Ready for a happy tear? 🥹')">
-          <div class="hint">🥹 A happy tear?</div>
-        </div>
-        <!-- 6 -->
-        <div class="surprise" data-img="memory6.jpeg" onclick="reveal(this,'This is what forever looks like 💞')">
-          <div class="hint">♾️ Forever…</div>
+        <div>
+          <button class="btn" onclick="verifyCode()">Verify Code</button>
+          <div id="codemsg" class="tiny" style="margin-top:8px"></div>
         </div>
       </div>
     </section>
@@ -198,30 +205,28 @@
     <section class="row" id="lovebits" style="display:none">
       <div class="card">
         <h2>💌 Ek Khat Tumhare Naam</h2>
-        <p class="lead">Demo letter – later we’ll replace with your real letter.</p>
+        <p class="lead">Demo letter – we’ll replace with your real letter later.</p>
         <textarea id="letter">Rahul,
-Thank you for being my safe place, my smile, my forever. Every day with you feels like home. — Urmi ❤️
-        </textarea>
+Thank you for being my safe place, my smile, my forever. Every day with you feels like home. — Urmi ❤️</textarea>
         <button class="btn" onclick="saveLetter()">Save Letter (local)</button>
-        <div class="tiny">Auto-saves in your browser only (localStorage).</div>
+        <div class="tiny">Auto-saves in this browser only.</div>
       </div>
-
       <div class="card">
         <h2>🎧 Apke liye kuch meri awaaz me</h2>
-        <p class="lead">Click play. (Replace file later with your real voice: <b>voice.mp3</b>)</p>
+        <p class="lead">Click play (replace with your file: <b>voice.mp3</b>).</p>
         <audio id="voice" controls src="voice.mp3" onerror="voiceMissing()"></audio>
         <button class="btn" onclick="playVoice()">Play Now</button>
         <div id="vmsg" class="tiny"></div>
       </div>
     </section>
 
-    <!-- Our Special Memory (Rahul writes) -->
+    <!-- Our Special Memory -->
     <section class="card" id="ours" style="display:none">
       <h2>🌸 Our Special Memory</h2>
-      <p class="lead">Urmi will write a line… and Rahul, you add yours below and save it 💖</p>
+      <p class="lead">Urmi’s line (demo) + Rahul can add his memory and save it.</p>
       <div class="row">
         <div>
-          <div class="tiny">Urmi’s line (demo)</div>
+          <div class="tiny">Urmi’s line</div>
           <div class="card" style="padding:12px">“The way you look at me when I laugh — that’s my favourite moment.”</div>
         </div>
         <div>
@@ -237,11 +242,13 @@ Thank you for being my safe place, my smile, my forever. Every day with you feel
       <button class="cta" onclick="fireworks()">🎆 Celebrate Us 🎆</button>
       <div class="tiny" style="margin-top:8px">Happy Anniversary, Forever Yours — Urmi ❤️</div>
     </div>
-
   </div>
 
   <div class="boom" id="boom"></div>
 </main>
+
+<!-- Background music (optional: upload bg-music.mp3 for your real track) -->
+<audio id="bgm" src="bg-music.mp3" loop preload="auto"></audio>
 
 <script>
   /* Floating hearts on cover */
@@ -259,26 +266,56 @@ Thank you for being my safe place, my smile, my forever. Every day with you feel
   }
   setInterval(spawnHeart,500);
 
+  /* Simple click sound via WebAudio (no file needed) */
+  let audioCtx;
+  function clickPing(){
+    try{
+      audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type='sine'; o.frequency.value=880;
+      g.gain.value=0.0001;
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime+0.01);
+      g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime+0.18);
+      o.stop(audioCtx.currentTime+0.2);
+    }catch(e){}
+  }
+
   /* Enter app */
   function enterApp(){
     document.getElementById('cover').style.display='none';
     document.getElementById('app').style.display='block';
     document.getElementById('pmsg').style.display='block';
     window.scrollTo({top:0,behavior:'smooth'});
+    clickPing();
   }
 
-  /* Puzzle gate (correct index = 1) */
+  /* Music controls */
+  const bgm = document.getElementById('bgm');
+  const musicBtn = document.getElementById('musicBtn');
+  let musicOn=false;
+  async function toggleMusic(){
+    try{
+      if(!musicOn){ await bgm.play(); musicBtn.textContent='⏸️ Pause Music'; musicOn=true; }
+      else{ bgm.pause(); musicBtn.textContent='▶️ Play Music'; musicOn=false; }
+      clickPing();
+    }catch(e){
+      alert('Tap again to allow music (browser blocked autoplay).');
+    }
+  }
+
+  /* Puzzle gate (correct = index 1) */
   let unlocked=false;
   function checkAnswer(i){
+    clickPing();
     const msg=document.getElementById('pmsg');
     if(i===1){
       unlocked=true;
       msg.textContent='✅ Correct! Surprises unlocked below.';
       msg.style.color='#b6ffce';
       document.getElementById('surprises').style.display='block';
-      document.getElementById('lovebits').style.display='grid';
-      document.getElementById('ours').style.display='block';
-      document.getElementById('celebrate').style.display='block';
       setTimeout(()=>document.getElementById('surprises').scrollIntoView({behavior:'smooth'}),250);
     }else{
       msg.textContent='❌ Not this one, try again 💫';
@@ -286,45 +323,90 @@ Thank you for being my safe place, my smile, my forever. Every day with you feel
     }
   }
 
-  /* Reveal a memory box */
+  /* Reveal boxes & progression */
+  let revealedCount=0, giftShown=false, codeShown=false, finalShown=false;
   function reveal(el, caption){
+    clickPing();
     const imgSrc = el.getAttribute('data-img');
+    if(el.classList.contains('revealed')) return;
+
     el.classList.add('revealed');
     el.innerHTML = '';
     const img = new Image();
-    img.onload = ()=>{ el.appendChild(img); addCap(); };
+    img.onload = ()=>{ el.appendChild(img); addCap(); afterReveal(); };
     img.onerror = ()=>{
-      // If image missing, show a soft fallback
       el.style.background='linear-gradient(135deg,#222,#444)';
       el.style.color='#fff';
       el.innerHTML = "<div style='padding:14px'>📷 (Upload "+imgSrc+" to your repo to see this memory)</div>";
-      addCap();
+      addCap(); afterReveal();
     };
     img.src = imgSrc;
+
     function addCap(){
       const c=document.createElement('div');
-      c.className='caption';
-      c.textContent=caption;
-      el.appendChild(c);
+      c.className='caption'; c.textContent=caption; el.appendChild(c);
+    }
+    function afterReveal(){
+      revealedCount++;
+      if(revealedCount>=3 && !giftShown){
+        document.getElementById('gift').style.display='block';
+        giftShown=true;
+        setTimeout(()=>document.getElementById('gift').scrollIntoView({behavior:'smooth'}),250);
+      }
+    }
+  }
+
+  /* Gift open action */
+  function openGift(){
+    clickPing();
+    // same Amazon demo link as QR
+    window.open('https://www.amazon.in/dp/B09N3YY84V/','_blank');
+    if(!codeShown){
+      document.getElementById('codegate').style.display='block';
+      codeShown=true;
+      setTimeout(()=>document.getElementById('codegate').scrollIntoView({behavior:'smooth'}),250);
+    }
+  }
+
+  /* Code verification (143) -> unlock final sections */
+  const SECRET_CODE = '143';
+  function verifyCode(){
+    clickPing();
+    const v = (document.getElementById('codeInput').value||'').trim();
+    const msg = document.getElementById('codemsg');
+    if(v === SECRET_CODE){
+      msg.textContent = '✅ Correct! Final surprises unlocked.';
+      msg.style.color = '#b6ffce';
+      if(!finalShown){
+        document.getElementById('lovebits').style.display='grid';
+        document.getElementById('ours').style.display='block';
+        document.getElementById('celebrate').style.display='block';
+        finalShown=true;
+        setTimeout(()=>document.getElementById('lovebits').scrollIntoView({behavior:'smooth'}),250);
+      }
+    }else{
+      msg.textContent = '❌ Wrong code, check the QR/Barcode (Parcel Code #143).';
+      msg.style.color = '#ffd1d1';
     }
   }
 
   /* Letter & Notes local save */
-  const LETTER_KEY='urmi_letter_v1';
-  const RAHUL_KEY='rahul_note_v1';
-  const letterEl=document.getElementById('letter');
-  const rahulEl=document.getElementById('rahulNote');
-  if(localStorage.getItem(LETTER_KEY)) letterEl.value=localStorage.getItem(LETTER_KEY);
-  if(localStorage.getItem(RAHUL_KEY)) rahulEl.value=localStorage.getItem(RAHUL_KEY);
-  function saveLetter(){ localStorage.setItem(LETTER_KEY, letterEl.value); alert('💌 Letter saved locally!'); }
-  function saveRahul(){ localStorage.setItem(RAHUL_KEY, rahulEl.value); alert('📝 Rahul’s note saved!'); }
+  const LETTER_KEY='urmi_letter_v1'; const RAHUL_KEY='rahul_note_v1';
+  const letterEl=document.getElementById('letter'); const rahulEl=document.getElementById('rahulNote');
+  window.addEventListener('DOMContentLoaded',()=>{
+    const L=localStorage.getItem(LETTER_KEY); if(L) letterEl.value=L;
+    const R=localStorage.getItem(RAHUL_KEY); if(R) rahulEl.value=R;
+  });
+  function saveLetter(){ localStorage.setItem(LETTER_KEY, letterEl.value); alert('💌 Letter saved locally!'); clickPing(); }
+  function saveRahul(){ localStorage.setItem(RAHUL_KEY, rahulEl.value); alert('📝 Rahul’s note saved!'); clickPing(); }
 
   /* Voice */
-  function playVoice(){ const v=document.getElementById('voice'); v.play(); }
+  function playVoice(){ const v=document.getElementById('voice'); v.play(); clickPing(); }
   function voiceMissing(){ document.getElementById('vmsg').textContent='(voice.mp3 not found yet — upload later)'; }
 
-  /* Fireworks (emoji confetti) */
+  /* Fireworks */
   function fireworks(){
+    clickPing();
     const boom=document.getElementById('boom');
     for(let i=0;i<80;i++){
       const s=document.createElement('div');
