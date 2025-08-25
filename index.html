@@ -14,7 +14,7 @@
       overflow-x: hidden;
     }
     header {
-      padding: 50px 20px;
+      padding: 40px 20px;
       font-size: 2.5rem;
       font-weight: bold;
       color: white;
@@ -25,11 +25,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .message {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin: 20px auto;
-      max-width: 600px;
+      max-width: 650px;
       line-height: 1.8;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.85);
       padding: 20px;
       border-radius: 15px;
       animation: fadeIn 3s ease-in-out;
@@ -38,33 +38,69 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    h2 {
+      margin-top: 40px;
+      color: #444;
+    }
     .gallery {
       display: flex;
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      margin: 40px auto;
-      max-width: 1000px;
+      margin: 30px auto;
+      max-width: 1100px;
     }
     .gallery div {
       width: 280px;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.7);
       border-radius: 15px;
       padding: 10px;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s;
     }
     .gallery div:hover {
       transform: scale(1.05);
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
     }
     .gallery img {
       width: 100%;
       border-radius: 12px;
     }
+    .btns {
+      margin: 40px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background: #ff6f91;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #ff3e6c;
+      transform: scale(1.1);
+    }
     footer {
-      margin-top: 40px;
+      margin-top: 50px;
       padding: 20px;
       font-size: 1rem;
       color: white;
+    }
+    /* Hidden surprise sections */
+    .hidden {
+      display: none;
+      margin: 20px auto;
+      max-width: 600px;
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 15px;
+      animation: fadeIn 1s ease-in-out;
     }
   </style>
 </head>
@@ -79,23 +115,54 @@
 
   <h2>📸 Our Memories</h2>
   <section class="gallery">
-    <div>
-      <img src="memory1.jpg" alt="Memory 1">
-      <p>Memory 1</p>
-    </div>
-    <div>
-      <img src="memory2.jpg" alt="Memory 2">
-      <p>Memory 2</p>
-    </div>
-    <div>
-      <img src="memory3.jpg" alt="Memory 3">
-      <p>Memory 3</p>
-    </div>
+    <div><img src="memory1.jpg" alt="Memory 1"><p>Memory 1</p></div>
+    <div><img src="memory2.jpg" alt="Memory 2"><p>Memory 2</p></div>
+    <div><img src="memory3.jpg" alt="Memory 3"><p>Memory 3</p></div>
+    <div><img src="memory4.jpg" alt="Memory 4"><p>Memory 4</p></div>
+    <div><img src="memory5.jpg" alt="Memory 5"><p>Memory 5</p></div>
+    <div><img src="memory6.jpg" alt="Memory 6"><p>Memory 6</p></div>
   </section>
+
+  <h2>💝 Special Surprises for Rahul 💝</h2>
+  <div class="btns">
+    <button onclick="playAudio()">🎧 Voice Note</button>
+    <button onclick="showNote()">💌 Special Note</button>
+    <button onclick="showMemory()">🎁 Our Special Memory</button>
+    <button onclick="showLove()">🌹 I Love You</button>
+  </div>
+
+  <!-- Hidden sections -->
+  <div id="note" class="hidden">
+    💌 *Rahul, tum meri zindagi ki sabse khoobsurat wajah ho... tum meri duniya ho.* 🌎❤️
+  </div>
+  <div id="memory" class="hidden">
+    🎁 *Yaad hai woh raat jab hum dono bas has rahe the bina wajah? Us pal ne mujhe sikha diya ki tumhare sath har lamha perfect hai.* ✨
+  </div>
+  <div id="love" class="hidden">
+    🌹 *I Love You Rahul, Forever & Always...* 💕
+  </div>
+
+  <!-- Audio -->
+  <audio id="voice" src="voice.mp3"></audio>
 
   <footer>
     Made with ❤️ by Me, for You 🌹
   </footer>
+
+  <script>
+    function playAudio() {
+      document.getElementById("voice").play();
+    }
+    function showNote() {
+      document.getElementById("note").style.display = "block";
+    }
+    function showMemory() {
+      document.getElementById("memory").style.display = "block";
+    }
+    function showLove() {
+      document.getElementById("love").style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
