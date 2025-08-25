@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy 1st Anniversary ❤️</title>
+  <title>Happy 1st Anniversary 💕</title>
   <style>
     body {
       margin: 0;
@@ -13,7 +13,6 @@
       text-align: center;
       overflow-x: hidden;
     }
-
     header {
       padding: 50px 20px;
       font-size: 2.5rem;
@@ -21,34 +20,82 @@
       color: white;
       animation: fadeInDown 2s ease-in-out;
     }
-
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-50px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .message {
       font-size: 1.3rem;
       margin: 20px auto;
       max-width: 600px;
       line-height: 1.8;
+      background: rgba(255,255,255,0.8);
+      padding: 20px;
+      border-radius: 15px;
+      animation: fadeIn 3s ease-in-out;
     }
-
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+    .gallery div {
+      width: 280px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 15px;
+      padding: 10px;
+      transition: transform 0.3s ease;
+    }
+    .gallery div:hover {
+      transform: scale(1.05);
+    }
     .gallery img {
-      width: 300px;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+      width: 100%;
+      border-radius: 12px;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 1rem;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <header>Happy 1st Anniversary ❤️</header>
+
+  <header>💖 Happy 1st Anniversary 💖</header>
+
+  <div class="message">
+    On 5th September 2024, we met for the first time… And today, one year later, I just want to say: <br><br>
+    You are my best friend, my love, and my forever 💖
+  </div>
 
   <h2>📸 Our Memories</h2>
   <section class="gallery">
-    <!-- Yeh line tumhari photo ke liye hai -->
-    <img src="WhatsApp Image 2025-08-25 at 7.59.08 PM.jpeg" alt="Memory 1">
+    <div>
+      <img src="memory1.jpg" alt="Memory 1">
+      <p>Memory 1</p>
+    </div>
+    <div>
+      <img src="memory2.jpg" alt="Memory 2">
+      <p>Memory 2</p>
+    </div>
+    <div>
+      <img src="memory3.jpg" alt="Memory 3">
+      <p>Memory 3</p>
+    </div>
   </section>
+
+  <footer>
+    Made with ❤️ by Me, for You 🌹
+  </footer>
+
 </body>
 </html>
