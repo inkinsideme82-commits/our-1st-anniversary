@@ -2,252 +2,243 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our 1st Anniversary 💖</title>
+  <title>For Rahul ❤️ From Urmi</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { width: 100%; height: 100%; font-family: 'Arial', sans-serif; overflow: hidden; }
-
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: #fff0f5;
+      color: #333;
+      text-align: center;
+    }
     .page {
       display: none;
-      width: 100%;
-      height: 100%;
+      padding: 40px;
+      min-height: 100vh;
       background-size: cover;
       background-position: center;
-      color: white;
-      text-align: center;
-      padding: 40px;
-      position: relative;
     }
-    .active { display: block; animation: fadeIn 1s ease-in-out; }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    .center-box {
-      background: rgba(0,0,0,0.5);
-      padding: 20px;
-      border-radius: 20px;
-      max-width: 750px;
-      margin: auto;
+    .active {
+      display: block;
+    }
+    h1, h2, h3 {
+      color: #b30059;
     }
     .btn {
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #ff4081;
+      background: #ff6699;
       color: white;
+      padding: 12px 25px;
       border: none;
       border-radius: 25px;
       cursor: pointer;
       font-size: 16px;
-      transition: 0.3s;
+      margin-top: 20px;
     }
-    .btn:hover { background: #ff1c68; }
-
-    /* OTP Input */
-    #otp-input { padding: 10px; border-radius: 10px; border: none; font-size: 18px; text-align: center; }
-
-    /* Feedback input */
-    textarea { width: 80%; height: 150px; padding: 10px; border-radius: 10px; border: none; font-size: 16px; }
-
-    .nav-btns { position: absolute; bottom: 20px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; }
+    img.memory {
+      max-width: 80%;
+      border: 8px solid white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      margin: 20px 0;
+    }
+    .letter-card {
+      background: url('letterbg.jpeg') no-repeat center center/cover;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      text-align: left;
+      white-space: pre-line;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    textarea {
+      width: 80%;
+      height: 120px;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .qr {
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
 
-<!-- OTP PAGE -->
-<div class="page active" id="otp-page" style="background:url('front-bg.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Hi Rahul (Nepaliya) 💖</h2>
-    <p>Enter the special OTP to unlock my heart:</p>
-    <input type="text" id="otp-input" placeholder="Enter Love OTP">
-    <button class="btn" onclick="checkOTP()">Unlock</button>
-    <p id="otp-msg"></p>
-  </div>
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- OTP Unlock Page -->
+<div id="otpPage" class="page active" style="background:url('background.jpeg') no-repeat center/cover;">
+  <h1>Unlock Urmi’s Heart 💖</h1>
+  <p>Enter the secret OTP (Nickname of Rahul)</p>
+  <input type="text" id="otpInput" placeholder="Enter OTP">
+  <button class="btn" onclick="checkOTP()">Unlock</button>
+  <p id="otpMsg"></p>
 </div>
 
-<!-- FRONT PAGE -->
-<div class="page" id="front" style="background:url('front-bg.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h1>Happy 1st Anniversary 💕</h1>
-    <p>To unlock Urmi’s heart 💖, just pause for a second…</p>
-    <button class="btn" onclick="nextPage()">Start Our Journey</button>
-  </div>
+<!-- Puzzle Page -->
+<div id="puzzlePage" class="page">
+  <h2>Our Little Quiz 💕</h2>
+  <p>हम पहली बार किस café में मिले थे?</p>
+  <button class="btn" onclick="checkAnswer('A')">A) Big Chill</button>
+  <button class="btn" onclick="checkAnswer('B')">B) Farzi Café</button>
+  <button class="btn" onclick="checkAnswer('C')">C) Taccos</button>
+  <p id="quizMsg"></p>
 </div>
 
-<!-- MEMORY 1 -->
-<div class="page" id="memory1" style="background:url('memory1.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Our First Smile 😊</h2>
-    <p>"I had no idea that the boy I met this day would one day become my whole world."</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<!-- Memories Pages -->
+<div id="memory1" class="page">
+  <h2>First Smile 😊</h2>
+  <img src="memory1.jpg" class="memory">
+  <p>"I had no idea that the boy I met this day would one day become my whole world."</p>
+  <button class="btn" onclick="nextPage('memory2')">Next ➡️</button>
 </div>
 
-<!-- MEMORY 2 -->
-<div class="page" id="memory2" style="background:url('memory2.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Perfect Fit 🤝</h2>
-    <p>"My fingers fit into yours like they were always meant to."</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<div id="memory2" class="page">
+  <h2>Holding Hands 🤝</h2>
+  <img src="memory2.jpg" class="memory">
+  <p>"My fingers fit into yours like they were always meant to."</p>
+  <button class="btn" onclick="nextPage('memory3')">Next ➡️</button>
 </div>
 
-<!-- MEMORY 3 -->
-<div class="page" id="memory3" style="background:url('memory3.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>A Moment We’ll Never Forget 💋</h2>
-    <p>That kiss wasn’t just our lips meeting…<br>
-       it was the moment our souls touched for the very first time.<br>
-       Beneath that tree, on that open road, two hearts quietly promised a forever.</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<div id="memory3" class="page">
+  <h2>Unforgettable Moment 💋</h2>
+  <img src="memory3.jpg" class="memory">
+  <p>That kiss wasn’t just our lips meeting…<br>
+     it was the moment our souls touched for the very first time.<br>
+     Beneath that tree, on that open road, two hearts quietly promised a forever.</p>
+  <button class="btn" onclick="nextPage('memory4')">Next ➡️</button>
 </div>
 
-<!-- MEMORY 4 -->
-<div class="page" id="memory4" style="background:url('memory4.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Hidden Connection 🎥</h2>
-    <p>"Our first video call — when pixels couldn’t hide the spark in your eyes."</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<div id="memory4" class="page">
+  <h2>Hidden Message 💌</h2>
+  <img src="memory4.jpg" class="memory">
+  <p>Our first video call — when pixels couldn’t hide the spark in your eyes.</p>
+  <button class="btn" onclick="nextPage('memory5')">Next ➡️</button>
 </div>
 
-<!-- MEMORY 5 -->
-<div class="page" id="memory5" style="background:url('memory5.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Another Special Day 🌸</h2>
-    <p>"Some memories don’t need words, they just stay in our hearts forever."</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<div id="memory5" class="page">
+  <h2>Beautiful Days 🌸</h2>
+  <img src="memory5.jpg" class="memory">
+  <p>"Every small moment with you feels like a chapter of a fairytale I never want to end."</p>
+  <button class="btn" onclick="nextPage('memory6')">Next ➡️</button>
 </div>
 
-<!-- MEMORY 6 -->
-<div class="page" id="memory6" style="background:url('memory6.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Today’s Truth 💞</h2>
-    <p>Rahul, I still remember that day when you scolded me.  
-       That moment broke me a little but it also made me realise how deeply you care.  
-       You taught me that love isn’t always about sweet words,  
-       sometimes it’s about honesty, growth and being real with each other.  
-       That’s the moment I knew – I don’t just want you, I need you. Forever.</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<div id="memory6" class="page">
+  <h2>Today’s Truth 🌙</h2>
+  <img src="memory6.jpg" class="memory">
+  <p>Rahul, I still remember that day when you scolded me about the differences.<br>
+     You said — *I never said I loved you because of the similarities, I said I loved you despite the differences.*<br>
+     That line made me realise what true love really means. 💙</p>
+  <button class="btn" onclick="nextPage('letterPage')">Next ➡️</button>
 </div>
 
-<!-- LETTER PAGE -->
-<div class="page" id="letter" style="background:url('letter-bg.jpeg') no-repeat center/cover;">
-  <div class="center-box" style="max-height:80%; overflow:auto;">
-    <h2>My Letter to You 💌</h2>
-    <p>
-      Rahul... Tumse milna jaise zindagi ke sab sawalon ka jawab mil jaana tha.  
-      Tumhari har baat, har hasi, har gussa – sab mujhe apna lagta hai.  
-      1 saal mein tumne mujhe woh sab diya jo main kabhi soch bhi nahi sakti thi –  
-      ek dost, ek partner, ek protector aur ek soulmate. 💖<br><br>
+<!-- Special Letter -->
+<div id="letterPage" class="page">
+  <h2>💌 A Letter To Rahul 💌</h2>
+  <div class="letter-card">
+    Rahul…  
+    Tumse milna jaise zindagi ke sab sawalon ka jawab mil jaana tha.  
+    Tumhari aankhon mein wo sukoon hai jo kahin aur nahi milta.  
+    Tumhari baaton mein wo sachchai hai jo duniya ke shor mein gum ho chuki hai.  
+    Mujhe tumse mohabbat sirf isliye nahi hai ke tum perfect ho,  
+    balki isliye hai ke tumhari adhooriyon mein bhi ek apnapan hai.  
 
-      Yaad hai woh pehla pal jab humne baat ki thi? Mujhe laga tha bas ek normal si baat hogi…  
-      par dheere dheere woh baat ek kahani ban gayi, ek aisi kahani jo shayad sirf humare liye likhi gayi thi.  
-      Tumne mujhe sikhaaya ke pyaar sirf filmo mein nahi hota – asal zindagi mein bhi milta hai.  
-      Aur mujhe mil gaya… tum mein. 💕<br><br>
+    Shayad main hamesha tumhe pareshaan karti hoon, shayad gusse mein ajeeb baatein keh deti hoon,  
+    lekin tum meri duniya ho Rahul. Tumhari hansi meri dua hai,  
+    tumhari khushi meri zarurat hai, aur tumhara saath meri taqdeer.  
 
-      Aaj ke din main tumse ek wada karti hoon – chahe kuch bhi ho, main tumhare saath rahungi.  
-      Har muskaan, har aansu, har jeet, har haar – sab mein tumhara saath dungi.  
-      Kyunki Rahul, tum sirf meri kahani ka ek hissa nahi ho… tum meri kahani ho. 🌹<br><br>
+    Main chahti hoon ke zindagi ke har mod par tum mere saath raho,  
+    aur agar kabhi main gir jaun to sirf tumhaare haath mujhe thaam lein.  
+    Rahul, tum meri kahani ka wo hissa ho jo kabhi khatam nahi hona chahiye.  
 
-      Forever yours,  
-      <b>Urmi</b> 💖
-    </p>
+    Tumhari…  
+    Urmi 💙
   </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+  <button class="btn" onclick="nextPage('promisePage')">Next ➡️</button>
 </div>
 
-<!-- PROMISES PAGE -->
-<div class="page" id="promises" style="background:url('front-bg.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Our Promises 🌹</h2>
-    <p>Here we’ll write promises for each other...</p>
-    <textarea id="rahulPromise" placeholder="Rahul, write your promise here..."></textarea><br>
-    <button class="btn" onclick="savePromise()">Save My Promise</button>
-    <p id="saveMsg"></p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
+<!-- Promise & Feedback -->
+<div id="promisePage" class="page">
+  <h2>🌟 Our Promises 🌟</h2>
+  <p>Urmi’s Promises:<br>
+     • I will always stand by you.<br>
+     • I will never let the smile on your face fade.<br>
+     • I will love you in every lifetime. 💕</p>
+  <p>Rahul, write your promises here 👇</p>
+  <textarea id="rahulPromise"></textarea>
+  <button class="btn" onclick="savePromise()">Save Promise</button>
+  <h3>Feedback 💭</h3>
+  <textarea id="rahulFeedback" placeholder="Rahul, how did you like this?"></textarea>
+  <button class="btn" onclick="saveFeedback()">Save Feedback</button>
+  <button class="btn" onclick="nextPage('giftPage')">Next ➡️</button>
 </div>
 
-<!-- FEEDBACK PAGE -->
-<div class="page" id="feedback" style="background:url('front-bg.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Feedback 📝</h2>
-    <p>Rahul, apna feedback likho – mujhe padhna hai!</p>
-    <textarea id="feedbackBox" placeholder="Write here..."></textarea><br>
-    <button class="btn" onclick="saveFeedback()">Save Feedback</button>
-    <p id="feedbackMsg"></p>
+<!-- Gift Page -->
+<div id="giftPage" class="page">
+  <h2>🎁 A Special Surprise 🎁</h2>
+  <div class="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=URMI+RAHUL" alt="QR Code">
   </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button><button class="btn" onclick="nextPage()">Next</button></div>
-</div>
-
-<!-- GIFT PAGE -->
-<div class="page" id="gift" style="background:url('front-bg.jpeg') no-repeat center/cover;">
-  <div class="center-box">
-    <h2>Surprise Gift 🎁</h2>
-    <p>Scan this QR to open your gift code 💖</p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?data=RahulUrmiForeverCode123&size=200x200" alt="Gift QR">
-    <p>"The best gift is always love wrapped in memories."</p>
-  </div>
-  <div class="nav-btns"><button class="btn" onclick="prevPage()">Prev</button></div>
+  <p>“This gift carries not just love, but a piece of forever.”</p>
 </div>
 
 <script>
-  let currentPage = 0;
-  const pages = document.querySelectorAll('.page');
-  let otpAttempts = 0;
-  const correctOTP = "Nepaliya";
-
-  function showPage(index) {
-    pages.forEach(p => p.classList.remove('active'));
-    pages[index].classList.add('active');
-    currentPage = index;
-  }
-  function nextPage() { showPage(currentPage + 1); }
-  function prevPage() { showPage(currentPage - 1); }
-
-  function checkOTP() {
-    const val = document.getElementById('otp-input').value.trim();
-    otpAttempts++;
-    if (val === correctOTP) {
-      showPage(1);
-    } else if (otpAttempts === 1) {
-      document.getElementById('otp-msg').innerText = "😜 Arre Nepaliya! Yeh toh galat hai!";
-    } else if (otpAttempts === 2) {
-      document.getElementById('otp-msg').innerText = "😂 Phir se galat! Tum toh bade pyaare confuse ho!";
+  // OTP SYSTEM
+  let otpTries = 0;
+  function checkOTP(){
+    const val = document.getElementById("otpInput").value.trim().toLowerCase();
+    otpTries++;
+    if(val === "nepaliya"){
+      nextPage("puzzlePage");
     } else {
-      document.getElementById('otp-msg').innerText = "Hehe, OTP hai: Nepaliya 💕";
-      setTimeout(()=>showPage(1),2000);
+      if(otpTries == 1){
+        document.getElementById("otpMsg").innerText = "😂 Arre Nepaliya ka nickname bhool gaye?";
+      } else if(otpTries == 2){
+        document.getElementById("otpMsg").innerText = "🙈 Abhi bhi galat! Hint: tumhara pyaara naam...";
+      } else {
+        document.getElementById("otpMsg").innerText = "😜 OTP = Nepaliya tha! Chalo, aage badhte hain...";
+        setTimeout(()=>nextPage("puzzlePage"),1500);
+      }
     }
   }
 
-  function savePromise() {
-    const val = document.getElementById('rahulPromise').value;
-    if (val) {
-      localStorage.setItem("rahulPromise", val);
-      document.getElementById('saveMsg').innerText = "Saved 💖";
+  // QUIZ
+  function checkAnswer(opt){
+    if(opt === 'B'){
+      document.getElementById("quizMsg").innerText = "💖 Yes! Farzi Café, Gurugram.";
+      setTimeout(()=>nextPage('memory1'),1500);
+    } else {
+      document.getElementById("quizMsg").innerText = "😅 Galat! Try again...";
     }
   }
 
-  function saveFeedback() {
-    const val = document.getElementById('feedbackBox').value;
-    if (val) {
-      localStorage.setItem("rahulFeedback", val);
-      document.getElementById('feedbackMsg').innerText = "Feedback Saved 💕";
-    }
+  // PAGE NAVIGATION
+  function nextPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
   }
 
-  window.onload = () => {
-    if(localStorage.getItem("rahulPromise")){
-      document.getElementById('rahulPromise').value = localStorage.getItem("rahulPromise");
-    }
-    if(localStorage.getItem("rahulFeedback")){
-      document.getElementById('feedbackBox').value = localStorage.getItem("rahulFeedback");
-    }
-  };
+  // PROMISE + FEEDBACK SAVE
+  function savePromise(){
+    localStorage.setItem("rahulPromise", document.getElementById("rahulPromise").value);
+    alert("Promise saved ❤️");
+  }
+  function saveFeedback(){
+    localStorage.setItem("rahulFeedback", document.getElementById("rahulFeedback").value);
+    alert("Feedback saved 💌");
+  }
 </script>
 
 </body>
