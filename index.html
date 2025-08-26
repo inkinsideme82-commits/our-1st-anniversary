@@ -1,157 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Anniversary</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #000;
-      color: #fff;
-      text-align: center;
-      overflow-x: hidden;
-    }
-    section {
-      display: none;
-      height: 100vh;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    section.active { display: flex; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Urmi ❤ Rahul — 1st Anniversary</title>
+<style>
+  :root{
+    --pink:#ff4d6d; --rose:#ff99aa; --deep:#b30059; --paper:#fff9f2;
+    --dark:#1a1a1a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;background:#000;color:#fff;font-family:Georgia, serif;overflow:hidden}
+  button{cursor:pointer}
+  .page{display:none;height:100vh;width:100vw;position:relative;padding:20px;text-align:center}
+  .active{display:block}
 
-    /* QR Page */
-    #qr img { width: 220px; }
-    #qr-quote { margin-top: 20px; font-size: 1.3rem; font-style: italic; }
-    #qr-hint { display: none; margin-top: 15px; font-size: 1.1rem; color: #ffb6c1; }
+  .title{margin:0 auto 10px; padding:6px 14px; display:inline-block; background:rgba(0,0,0,.35); border-radius:12px; color:#fff; text-shadow:0 2px 8px #000}
+  .btn{background:var(--pink);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-size:16px;box-shadow:0 0 12px var(--rose);margin:8px}
+  .sub{opacity:.9}
 
-    /* Letter Page */
-    #envelope { width: 220px; cursor: pointer; }
-    #letter {
-      display: none;
-      padding: 25px;
-      background: #fff;
-      color: #000;
-      text-align: left;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      height: 100vh;
-      overflow-y: auto;
-    }
+  /* Frames: images never overflow */
+  .frame{
+    background:#fff;border:6px solid var(--pink);border-radius:16px;
+    width:min(90vw,520px);height:min(55vh,420px);margin:0 auto;
+    overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.5);position:relative
+  }
+  .frame img{width:100%;height:100%;object-fit:cover;display:block}
 
-    /* Memories */
-    .memory { width: 90%; max-width: 800px; position: relative; }
-    .memory img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(255,255,255,0.4);
-    }
-    .heart {
-      position: absolute;
-      width: 18px; height: 18px;
-      background: red;
-      transform: rotate(45deg);
-      animation: float 6s linear infinite;
-    }
-    .heart::before, .heart::after {
-      content:''; position:absolute;
-      width:18px; height:18px; background:red; border-radius:50%;
-    }
-    .heart::before{ top:-9px; left:0; }
-    .heart::after{ left:-9px; top:0; }
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); opacity:1; }
-      100%{ transform: translateY(-600px) rotate(45deg); opacity:0; }
-    }
+  /* Front page */
+  .front-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:6vh}
+  .sparkle, .heartFloat{
+    position:absolute;pointer-events:none;opacity:.75;animation:float 6s linear infinite;
+  }
+  @keyframes float{
+    0%{transform:translateY(20px) scale(.9);opacity:.0}
+    20%{opacity:.9}
+    100%{transform:translateY(-70vh) scale(1.2);opacity:.1}
+  }
 
-    /* Final Page */
-    #final h1 { font-size: 2.4rem; margin-bottom: 20px; }
-    #final p { font-size: 1.5rem; color: #ffb6c1; }
+  /* OTP */
+  .input{width:min(90vw,360px);padding:12px;border-radius:10px;border:2px solid var(--rose);font-size:18px;margin:10px auto;display:block}
 
-    /* Buttons */
-    .btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #ff4d6d;
-      border: none; border-radius: 8px;
-      color: #fff; font-size: 1rem;
-      cursor: pointer;
-    }
-  </style>
+  /* Memories grid: two boxes */
+  .row2{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:10px}
+  .box{
+    width:min(44vw,460px);height:min(48vh,380px);position:relative;border-radius:16px;overflow:hidden;border:6px solid var(--pink);background:#111;
+    box-shadow:0 8px 20px rgba(0,0,0,.45)
+  }
+  .box img{width:100%;height:100%;object-fit:cover;display:block}
+  /* Cover layer */
+  .cover{
+    position:absolute;inset:0;background:linear-gradient(135deg, rgba(255,77,109,.95), rgba(255,153,170,.95));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:20px;text-shadow:0 2px 8px #b0004a;
+    letter-spacing:.5px; user-select:none; transition:transform .7s ease, opacity .7s ease;
+  }
+  .box.open .cover{transform:rotateX(90deg);opacity:0;pointer-events:none}
+  .caption{
+    position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent, rgba(0,0,0,.75));
+    color:#fff;padding:12px 14px;font-size:15px;line-height:1.4;opacity:0;transform:translateY(10px);transition:all .45s ease
+  }
+  .box.open .caption{opacity:1;transform:translateY(0)}
+  .hintTap{font-size:13px; opacity:.85}
+
+  /* Puzzle */
+  .opts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+
+  /* Letter: envelope open animation */
+  .letterStage{display:flex;justify-content:center;align-items:center;height:72vh}
+  .envelope{position:relative;width:min(92vw,780px);height:min(60vh,520px);perspective:1200px}
+  .env-body{position:absolute;inset:0;background:var(--paper);border-radius:14px;border:6px solid #e9d9c7;box-shadow:0 14px 40px rgba(0,0,0,.45);overflow:hidden}
+  .flap{
+    position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(180deg,#e7cdb8,#d9b89f);
+    transform-origin:top; transform:rotateX(0deg); transition:transform 1s ease;
+    border-bottom:6px solid #cfae90; border-top-left-radius:12px;border-top-right-radius:12px;
+  }
+  .open .flap{transform:rotateX(-180deg)}
+  .paper{
+    position:absolute;inset:16px;background:#fffdf8;border:1px solid #f1e6d9;border-radius:10px;
+    padding:18px 18px 22px 18px; overflow:auto; height:calc(100% - 32px); color:#2a2018;
+    font-family: "Segoe Script", "Lucida Handwriting", cursive; font-size:18px; line-height:1.6;
+  }
+
+  /* Gift box + QR */
+  .giftWrap{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:10px}
+  .giftBox{width:260px;height:180px;background:var(--pink);border-radius:14px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .giftLid{position:absolute;left:-10px;right:-10px;top:-40px;height:70px;background:#ff7d97;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .7s ease}
+  .giftBox.open .giftLid{transform:translateY(-40px) rotate(-6deg)}
+  .ribbonV{position:absolute;top:0;bottom:0;left:50%;width:22px;background:#fff;transform:translateX(-50%)}
+  .ribbonH{position:absolute;left:0;right:0;top:38%;height:18px;background:#fff}
+  .qrPane{background:#fff;border-radius:12px;padding:14px;display:inline-block;box-shadow:0 10px 24px rgba(0,0,0,.45);opacity:0;transform:translateY(12px);transition:all .5s ease}
+  .giftBox.open + .qrPane{opacity:1;transform:translateY(0)}
+
+  /* Footer nav */
+  .nav{position:absolute;left:0;right:0;bottom:12px}
+  .note{font-style:italic;opacity:.9}
+
+  /* Hearts + stars for front */
+  .floatWrap > div{position:absolute}
+</style>
 </head>
 <body>
 
-  <!-- Page 1: QR -->
-  <section id="qr" class="active">
-    <img src="qr.png" alt="QR Code">
-    <p id="qr-quote">“Some gifts are hidden, some are meant to be unlocked ❤️”</p>
-    <p id="qr-hint">Hint: Parcel kholo... code likha h URMIxRAHUL2025 💌</p>
-    <button class="btn" onclick="showHint()">Scan (Demo)</button>
-    <button class="btn" onclick="nextPage()">Next</button>
-  </section>
+<!-- Music -->
+<audio id="bgm" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6f1b2c97f3.mp3?filename=romantic-background-112194.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- Page 2: Letter -->
-  <section id="letter-page">
-    <img id="envelope" src="envelope.png" alt="Envelope">
-    <div id="letter">
-      <h2 style="text-align:center;">My Letter to You 💙</h2>
-      <p>
-        (⚠️ Yahan pe tumhara pura original letter exactly paste karna hai —
-        main abhi sample likh raha hoon, tum apna letter daal dena.)
-      </p>
-      <button class="btn" onclick="nextPage()">Next</button>
+<!-- OTP PAGE -->
+<section class="page active" id="otpPage">
+  <h1 class="title">Unlock Gate 🔐</h1>
+  <p class="sub">Question: <b>What is nickname called by Urmi to Rahul?</b></p>
+  <input id="otp" class="input" placeholder="Type nickname here..." autocomplete="off"/>
+  <button class="btn" onclick="checkOTP()">Unlock</button>
+  <div id="otpMsg" class="sub" style="margin-top:8px;"></div>
+  <div class="nav"></div>
+</section>
+
+<!-- FRONT PAGE -->
+<section class="page" id="frontPage">
+  <h2 class="title">Happy 1st Anniversary 💖</h2>
+  <div class="front-wrap">
+    <div class="frame" id="frontFrame">
+      <img src="front-bg.jpeg" alt="Us"/>
     </div>
-  </section>
-
-  <!-- Page 3: Memories -->
-  <section id="memories">
-    <div class="memory">
-      <img src="memory1.jpg" alt="Memory 1">
+    <div class="sub" style="max-width:900px">
+      To unlock Urmi’s heart 💖, just pause for a second… close your eyes and feel her love wrapping around you forever.
     </div>
-    <button class="btn" onclick="nextPage()">Next</button>
-  </section>
+    <button class="btn" onclick="go('mem1')">Start Journey ➜</button>
+  </div>
+  <!-- floating decor -->
+  <div class="floatWrap">
+    <div class="heartFloat" style="left:10%;bottom:-10px;animation-delay:0s">💖</div>
+    <div class="heartFloat" style="left:25%;bottom:-20px;animation-delay:.5s">💞</div>
+    <div class="sparkle"    style="left:40%;bottom:-30px;animation-delay:1s">✨</div>
+    <div class="sparkle"    style="left:60%;bottom:-25px;animation-delay:1.8s">✨</div>
+    <div class="heartFloat" style="left:75%;bottom:-15px;animation-delay:2.2s">💗</div>
+  </div>
+  <div class="nav"></div>
+</section>
 
-  <!-- Page 4: Final -->
-  <section id="final">
-    <h1>Happy Anniversary Once Again ❤️</h1>
-    <p>Love You and Thank You 💕</p>
-  </section>
+<!-- MEMORIES — PAGE 1 -->
+<section class="page" id="mem1">
+  <h2 class="title">Our Memories — 1</h2>
+  <div class="sub">Tap/Click the boxes to reveal 💌</div>
+  <div class="row2">
+    <!-- memory1 -->
+    <div class="box" onclick="openBox(this)">
+      <img src="memory1.jpeg" alt="memory1">
+      <div class="cover">Click / Touch me</div>
+      <div class="caption">“I had no idea that the boy I met this day would one day become my whole world.”</div>
+    </div>
+    <!-- memory2 -->
+    <div class="box" onclick="openBox(this)">
+      <img src="memory2.jpeg" alt="memory2">
+      <div class="cover">Click / Touch me</div>
+      <div class="caption">“My fingers fit into yours like they were always meant to.”</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn" onclick="go('frontPage')">⬅ Back</button>
+    <button class="btn" onclick="go('mem2')">Next ➜</button>
+  </div>
+</section>
 
-  <script>
-    let current = 0;
-    const sections = document.querySelectorAll("section");
+<!-- MEMORIES — PAGE 2 -->
+<section class="page" id="mem2">
+  <h2 class="title">Our Memories — 2</h2>
+  <div class="row2">
+    <!-- memory3 -->
+    <div class="box" onclick="openBox(this)">
+      <img src="memory3.jpeg" alt="memory3">
+      <div class="cover">Click / Touch me</div>
+      <div class="caption">
+        That kiss wasn’t just our lips meeting…<br/>
+        it was the moment our souls touched for the very first time.<br/>
+        Beneath that tree, on that open road, two hearts quietly promised a forever.
+      </div>
+    </div>
+    <!-- memory4 -->
+    <div class="box" onclick="openBox(this)">
+      <img src="memory4.jpeg" alt="memory4">
+      <div class="cover">A tiny hidden message… tap</div>
+      <div class="caption">Our first video call — when pixels couldn’t hide the spark in your eyes.</div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn" onclick="go('mem1')">⬅ Back</button>
+    <button class="btn" onclick="go('mem3')">Next ➜</button>
+  </div>
+</section>
 
-    function nextPage() {
-      sections[current].classList.remove("active");
-      current++;
-      if (current < sections.length) sections[current].classList.add("active");
-    }
+<!-- MEMORIES — PAGE 3 -->
+<section class="page" id="mem3">
+  <h2 class="title">Our Memories — 3</h2>
+  <div class="row2">
+    <!-- memory5 -->
+    <div class="box" onclick="openBox(this)">
+      <img src="memory5.jpeg" alt="memory5">
+      <div class="cover">Click / Touch me</div>
+      <div class="caption">“Every little moment with you turned ordinary days into something magical.”</div>
+    </div>
+    <!-- memory6 -->
+    <div class="box" onclick="openBox(this)">
+      <img src="memory6.jpeg" alt="memory6">
+      <div class="cover">Today’s truth</div>
+      <div class="caption" style="font-size:14px;line-height:1.5">
+        Rahul, I still remember that day when you scolded me about the differences between boys and girls. It hurt me deeply, because I’ve always lived by the belief that there should be no difference. That day I was so sad… but then you came to meet me, just to make sure I wouldn’t stay upset. In that moment, I truly felt you cared for my feelings more than anything else.<br/><br/>
+        But today, sometimes I don’t feel the same. I feel my emotions don’t matter to you as much, and that hurts me more than anything. I don’t want expensive gifts or big promises — I just want you to always care for my feelings the way you did that day. Because for me, being understood is the biggest love.
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn" onclick="go('mem2')">⬅ Back</button>
+    <button class="btn" onclick="go('puzzle')">Next ➜</button>
+  </div>
+</section>
 
-    // QR Scan → show hidden text
-    function showHint() {
-      document.getElementById("qr-hint").style.display = "block";
-    }
+<!-- PUZZLE -->
+<section class="page" id="puzzle">
+  <h2 class="title">Quiz Time ☕</h2>
+  <div class="sub">हम पहली बार किस café में मिले थे?</div>
+  <div class="opts">
+    <button class="btn" onclick="quiz('Big Chill')">Big Chill</button>
+    <button class="btn" onclick="quiz('Tacos')">Tacos</button>
+    <button class="btn" onclick="quiz('Farzi Cafe')">Farzi Cafe</button>
+  </div>
+  <div id="quizMsg" class="sub"></div>
+  <div class="nav">
+    <button class="btn" onclick="go('mem3')">⬅ Back</button>
+    <button class="btn" onclick="go('letter')">Next ➜</button>
+  </div>
+</section>
 
-    // Envelope click → open letter
-    document.getElementById("envelope").addEventListener("click", () => {
-      document.getElementById("envelope").style.display = "none";
-      document.getElementById("letter").style.display = "block";
-    });
+<!-- LETTER (Envelope) -->
+<section class="page" id="letter">
+  <h2 class="title">A Letter To Rahul 💌</h2>
+  <div class="letterStage">
+    <div class="envelope" id="env" onclick="openEnvelope()">
+      <div class="env-body">
+        <div class="flap"></div>
+        <div class="paper" id="paper" style="background:url('letter-bg.jpeg') center/cover, #fffdf8">
+Rahul... Tumse milna jaise zindagi ke sab sawalon ka jawab mil jaana tha. 5th September 2024 — Gurugram, Farzi Café — Mera dil us din pehli baar kisi ke liye itna shant tha... Tumhara haath, mera sir tumhare kandhe par... Woh sukoon shabdon se bahar tha. Tumhari bike pe girte waqt tumne mujhe pakda — jaise bas... tumhare haathon mein meri jagah fix ho. Phir... jab PG ke bahar tum aaye, tumne mujhe apni taraf kheench liya. Pehli baar main kisi ke itne kareeb aayi thi... aur fir, tumne mujhe khud pe bharosa diya. Khule sadak par, bike pe woh pehli lipkiss... tumhari aankhon ne mujh mein himmat bhar di thi. Ek baar jab maine suit pehna, toh main apne aap mein thoda uncomfortable thi... lekin tumne mujhe itna confident feel karaya, ki us din ke baad Indian wear bhi mujhe beautiful lagne laga. Phir ek din tumne mujhse kaha: "Ek din main tumhara burden kam karunga..." Aur us din mujhe tum sirf partner nahi, future lage. Tumne mujhe doston se milwaya, apni family se introduce karaya — tumne mujhe apni duniya ka hissa banaya. Par zindagi sirf ache palon ka naam nahi... Aaya ek waqt jab tum mujhpe chillane lage, mujhe daantne lage, neecha dikhane lage... Aur main woh Urmi ban gayi jo sirf rone lagi thi. Par jaise har ladai ke baad tum maafi maangte the, baith kar baat karte the, kabhi "chhod ke jaane ki baat" nahi karte the... mujhe lagta hai Rahul, wahi sachcha pyaar hota hai. Jisme galtiyan hoti hain, lekin saath chhoda nahi jaata. Aaj humara ek saal complete ho raha hai... Aur main bas itna chahti hoon ki tum mujhe chhoti-chhoti baaton par appreciate karte raho. Jab tum mujhe notice karte ho, main apne aap ko aur zyada apna aur tumhare kareeb mehsoos karti hoon. Aur Rahul, ek guzarish hai — gusse me mujhe insult mat karo. Main abhi bhi aur future me bhi yeh seh nahi paungi. Mujhe bharosa hai tum apne tone aur words pe kaam kar rahe ho... aur yahi mera sabse bada hope hai. Please, mujhe kabhi harne mat dena... Maine apni duniya tumhare naam kar di hai. Mujhe bas yeh feel mat hone dena ki mera faisla galat tha. Rahul... I know neither of us is perfect, but maybe that’s why we are perfect for each other. I fall, you hold me. You get angry, I calm you down. Love isn’t just about the beautiful moments... It’s also about the fights we can’t sleep through, and the way we always find our way back to each other. You’ve become my habit, my comfort, my safe place. And today, after one year, I just want to say — my every tomorrow, my every today begins and ends with you. Please, never let me feel that choosing you was a mistake... Because for me, Rahul, loving you will always be the truest decision of my life. Happy 1st Anniversary of Us. Tumhari… Urmi 💙
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sub">Tap the envelope to open ✉️</div>
+  <div class="nav">
+    <button class="btn" onclick="go('puzzle')">⬅ Back</button>
+    <button class="btn" onclick="go('gift')">Next ➜</button>
+  </div>
+</section>
 
-    // Floating hearts in memories
-    const memory = document.querySelector(".memory");
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random()*90 + "%";
-      heart.style.bottom = "0px";
-      memory.appendChild(heart);
-      setTimeout(()=>heart.remove(),6000);
-    }, 900);
-  </script>
+<!-- GIFT -->
+<section class="page" id="gift">
+  <h2 class="title">Your Surprise Gift 🎁</h2>
+  <div class="giftWrap">
+    <div class="giftBox" id="gbox" onclick="openGift()">
+      <div class="giftLid"></div>
+      <div class="ribbonV"></div>
+      <div class="ribbonH"></div>
+    </div>
+    <div class="qrPane">
+      <img alt="QR" width="220" height="220"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=URMI-RAHUL-2024">
+    </div>
+    <div class="sub">
+      Code inside: <b>URMI-RAHUL-2024</b><br/>
+      <span class="note">Open the parcel with this code — if received. If not, ask Urmi 💕</span>
+    </div>
+    <div class="sub" style="max-width:900px">“Love is choosing each other a little more, every single day.”</div>
+  </div>
+  <div class="nav">
+    <button class="btn" onclick="go('letter')">⬅ Back</button>
+    <button class="btn" onclick="go('promises')">Next ➜</button>
+  </div>
+</section>
 
+<!-- PROMISES + FEEDBACK -->
+<section class="page" id="promises">
+  <h2 class="title">Our Special Promises 💍</h2>
+  <div class="sub">Write & save — it stays on this device (localStorage)</div>
+  <div style="max-width:980px;margin:10px auto">
+    <h3>Urmi’s Promises (editable)</h3>
+    <textarea id="urmiP" class="input" style="height:120px" placeholder="Type your promises here..."></textarea>
+    <br><button class="btn" onclick="saveBox('urmiP')">Save</button>
+
+    <h3 style="margin-top:18px">Rahul’s Promises</h3>
+    <textarea id="rahulP" class="input" style="height:120px" placeholder="Rahul, write your promises..."></textarea>
+    <br><button class="btn" onclick="saveBox('rahulP')">Save</button>
+
+    <h3 style="margin-top:18px">Feedback for Urmi 💌</h3>
+    <textarea id="fb" class="input" style="height:120px" placeholder="How was the surprise?"></textarea>
+    <br><button class="btn" onclick="saveBox('fb')">Save</button>
+  </div>
+  <h2 style="margin-top:10px;color:#ffd1dc;text-shadow:0 0 12px #ff7d97">Happy Anniversary Once Again 💖</h2>
+  <div class="nav">
+    <button class="btn" onclick="go('gift')">⬅ Back</button>
+  </div>
+</section>
+
+<script>
+  // Navigation
+  const pages = ["otpPage","frontPage","mem1","mem2","mem3","puzzle","letter","gift","promises"];
+  let cur = 0;
+  function show(i){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(pages[i]).classList.add('active');
+    cur = i;
+  }
+  function go(id){ show(pages.indexOf(id)); }
+
+  // OTP
+  let tries = 0;
+  function checkOTP(){
+    const val = (document.getElementById('otp').value||"").trim().toLowerCase();
+    const msg = document.getElementById('otpMsg');
+    if(val === "nepaliya"){ show(1); return; }
+    tries++;
+    if(tries===1) msg.textContent = "😜 Arre Rahul ka pyaara nickname bhool gaye?";
+    else if(tries===2) msg.textContent = "🙈 Hint: U से नहीं, N se shuru hota hai…";
+    else { msg.textContent = "😅 OTP = ‘nepaliya’ tha! Urmi phir bhi aage jaane de rahi hai 💖"; setTimeout(()=>show(1),900); }
+  }
+
+  // Memories open
+  function openBox(el){ el.classList.add('open'); }
+
+  // Puzzle
+  function quiz(ans){
+    const q = document.getElementById('quizMsg');
+    if(ans==="Farzi Cafe") { q.textContent="You still remember 💖"; q.style.color="#9cffc7"; }
+    else { q.textContent="Arey yeh toh easy tha baby 😅"; q.style.color="#ffd1dc"; }
+  }
+
+  // Envelope open
+  let envOpened=false;
+  function openEnvelope(){
+    if(envOpened) return;
+    envOpened=true;
+    document.getElementById('env').classList.add('open');
+  }
+
+  // Gift open
+  function openGift(){ document.getElementById('gbox').classList.toggle('open'); }
+
+  // Save & load textareas (localStorage)
+  const ids = ["urmiP","rahulP","fb"];
+  function saveBox(id){ localStorage.setItem("anniv_"+id, document.getElementById(id).value); alert("Saved 💖"); }
+  function loadSaved(){ ids.forEach(id=>{ const v = localStorage.getItem("anniv_"+id); if(v) document.getElementById(id).value = v; }); }
+  window.addEventListener('load', loadSaved);
+
+  // Autoplay fix (some mobiles block); tap to resume
+  document.addEventListener('click', ()=>{ const a=document.getElementById('bgm'); if(a && a.paused){ a.play().catch(()=>{}); } }, {once:true});
+</script>
 </body>
 </html>
