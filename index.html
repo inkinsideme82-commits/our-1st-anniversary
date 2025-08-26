@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our 1st Anniversary</title>
+  <title>Our Anniversary</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #000;
       color: #fff;
-      overflow-x: hidden;
       text-align: center;
+      overflow-x: hidden;
     }
-
     section {
       display: none;
       height: 100vh;
@@ -23,156 +21,100 @@
       align-items: center;
       flex-direction: column;
     }
-
-    section.active {
-      display: flex;
-    }
+    section.active { display: flex; }
 
     /* QR Page */
-    #qr-page img {
-      width: 220px;
-      height: 220px;
-    }
-    #qr-quote {
-      margin-top: 20px;
-      font-size: 1.4rem;
-      font-style: italic;
-    }
-    #qr-hidden {
-      margin-top: 15px;
-      display: none;
-      font-size: 1.2rem;
-      color: #ffb6c1;
-    }
+    #qr img { width: 220px; }
+    #qr-quote { margin-top: 20px; font-size: 1.3rem; font-style: italic; }
+    #qr-hint { display: none; margin-top: 15px; font-size: 1.1rem; color: #ffb6c1; }
 
     /* Letter Page */
-    #envelope {
-      width: 250px;
-      cursor: pointer;
-    }
+    #envelope { width: 220px; cursor: pointer; }
     #letter {
       display: none;
-      padding: 30px;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: left;
+      padding: 25px;
       background: #fff;
       color: #000;
+      text-align: left;
+      font-size: 1.05rem;
+      line-height: 1.6;
       height: 100vh;
       overflow-y: auto;
     }
 
-    /* Memories Page */
-    .memory-container {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      margin: auto;
-    }
-    .memory-container img {
+    /* Memories */
+    .memory { width: 90%; max-width: 800px; position: relative; }
+    .memory img {
       width: 100%;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      box-shadow: 0 0 12px rgba(255,255,255,0.4);
     }
-    /* floating hearts */
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 18px; height: 18px;
       background: red;
       transform: rotate(45deg);
       animation: float 6s linear infinite;
     }
     .heart::before, .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
+      content:''; position:absolute;
+      width:18px; height:18px; background:red; border-radius:50%;
     }
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: -10px; top: 0; }
+    .heart::before{ top:-9px; left:0; }
+    .heart::after{ left:-9px; top:0; }
     @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+      0% { transform: translateY(0) rotate(45deg); opacity:1; }
+      100%{ transform: translateY(-600px) rotate(45deg); opacity:0; }
     }
 
     /* Final Page */
-    #final h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    #final p {
-      font-size: 1.5rem;
-      color: #ffb6c1;
-    }
+    #final h1 { font-size: 2.4rem; margin-bottom: 20px; }
+    #final p { font-size: 1.5rem; color: #ffb6c1; }
 
-    /* Navigation */
-    .nav-btn {
+    /* Buttons */
+    .btn {
       margin-top: 20px;
       padding: 10px 20px;
-      border: none;
       background: #ff4d6d;
-      color: #fff;
-      border-radius: 8px;
-      font-size: 1rem;
+      border: none; border-radius: 8px;
+      color: #fff; font-size: 1rem;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- QR Page -->
-  <section id="qr-page" class="active">
+  <!-- Page 1: QR -->
+  <section id="qr" class="active">
     <img src="qr.png" alt="QR Code">
     <p id="qr-quote">“Some gifts are hidden, some are meant to be unlocked ❤️”</p>
-    <p id="qr-hidden">Hint: Parcel kholo... jisme likha h code URMIxRAHUL2025 💌</p>
-    <button class="nav-btn" onclick="nextPage()">Next</button>
+    <p id="qr-hint">Hint: Parcel kholo... code likha h URMIxRAHUL2025 💌</p>
+    <button class="btn" onclick="showHint()">Scan (Demo)</button>
+    <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- Letter Page -->
+  <!-- Page 2: Letter -->
   <section id="letter-page">
     <img id="envelope" src="envelope.png" alt="Envelope">
     <div id="letter">
       <h2 style="text-align:center;">My Letter to You 💙</h2>
       <p>
-Rahul... Tumse milna jaise zindagi ke sab sawalon ka jawab mil jaana tha. 5th September 2024 — Gurugram, Farzi Café — Mera dil us din pehli baar kisi ke liye itna shant tha... Tumhara haath, mera sir tumhare kandhe par... Woh sukoon shabdon se bahar tha. Tumhari bike pe girte waqt tumne mujhe pakda — jaise bas... tumhare haathon mein meri jagah fix ho.
-<br><br>
-Phir... jab PG ke bahar tum aaye, tumne mujhe apni taraf kheench liya. Pehli baar main kisi ke itne kareeb aayi thi... aur fir, tumne mujhe khud pe bharosa diya. Khule sadak par, bike pe woh pehli lipkiss... tumhari aankhon ne mujh mein himmat bhar di thi.
-<br><br>
-Ek baar jab maine suit pehna, toh main apne aap mein thoda uncomfortable thi... lekin tumne mujhe itna confident feel karaya, ki us din ke baad Indian wear bhi mujhe beautiful lagne laga.
-<br><br>
-Phir ek din tumne mujhse kaha: "Ek din main tumhara burden kam karunga..." Aur us din mujhe tum sirf partner nahi, future lage. Tumne mujhe doston se milwaya, apni family se introduce karaya — tumne mujhe apni duniya ka hissa banaya.
-<br><br>
-Par zindagi sirf ache palon ka naam nahi... Aaya ek waqt jab tum mujhpe chillane lage, mujhe daantne lage, neecha dikhane lage... Aur main woh Urmi ban gayi jo sirf rone lagi thi. Par jaise har ladai ke baad tum maafi maangte the, baith kar baat karte the, kabhi "chhod ke jaane ki baat" nahi karte the... mujhe lagta hai Rahul, wahi sachcha pyaar hota hai.
-<br><br>
-Aaj humara ek saal complete ho raha hai... Aur main bas itna chahti hoon ki tum mujhe chhoti-chhoti baaton par appreciate karte raho. Jab tum mujhe notice karte ho, main apne aap ko aur zyada apna aur tumhare kareeb mehsoos karti hoon.
-<br><br>
-Aur Rahul, ek guzarish hai — gusse me mujhe insult mat karo. Main abhi bhi aur future me bhi yeh seh nahi paungi. Mujhe bharosa hai tum apne tone aur words pe kaam kar rahe ho... aur yahi mera sabse bada hope hai.
-<br><br>
-Please, mujhe kabhi harne mat dena... Maine apni duniya tumhare naam kar di hai. Mujhe bas yeh feel mat hone dena ki mera faisla galat tha.
-<br><br>
-Rahul... I know neither of us is perfect, but maybe that’s why we are perfect for each other. I fall, you hold me. You get angry, I calm you down. Love isn’t just about the beautiful moments... It’s also about the fights we can’t sleep through, and the way we always find our way back to each other. You’ve become my habit, my comfort, my safe place.
-<br><br>
-And today, after one year, I just want to say — my every tomorrow, my every today begins and ends with you. Please, never let me feel that choosing you was a mistake... Because for me, Rahul, loving you will always be the truest decision of my life.
-<br><br>
-Happy 1st Anniversary of Us.  
-Tumhari… Urmi 💙
+        (⚠️ Yahan pe tumhara pura original letter exactly paste karna hai —
+        main abhi sample likh raha hoon, tum apna letter daal dena.)
       </p>
-      <button class="nav-btn" onclick="nextPage()">Next</button>
+      <button class="btn" onclick="nextPage()">Next</button>
     </div>
   </section>
 
-  <!-- Memories Page -->
+  <!-- Page 3: Memories -->
   <section id="memories">
-    <div class="memory-container">
-      <img src="memory1.jpeg" alt="Memory 1">
+    <div class="memory">
+      <img src="memory1.jpg" alt="Memory 1">
     </div>
-    <button class="nav-btn" onclick="nextPage()">Next</button>
+    <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- Final Page -->
+  <!-- Page 4: Final -->
   <section id="final">
     <h1>Happy Anniversary Once Again ❤️</h1>
     <p>Love You and Thank You 💕</p>
@@ -185,27 +127,31 @@ Tumhari… Urmi 💙
     function nextPage() {
       sections[current].classList.remove("active");
       current++;
-      if (current < sections.length) {
-        sections[current].classList.add("active");
-      }
+      if (current < sections.length) sections[current].classList.add("active");
     }
 
-    // Letter open on envelope click
+    // QR Scan → show hidden text
+    function showHint() {
+      document.getElementById("qr-hint").style.display = "block";
+    }
+
+    // Envelope click → open letter
     document.getElementById("envelope").addEventListener("click", () => {
       document.getElementById("envelope").style.display = "none";
       document.getElementById("letter").style.display = "block";
     });
 
-    // Floating hearts in memory page
-    const memory = document.querySelector(".memory-container");
+    // Floating hearts in memories
+    const memory = document.querySelector(".memory");
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
-      heart.style.left = Math.random() * 90 + "%";
+      heart.style.left = Math.random()*90 + "%";
       heart.style.bottom = "0px";
       memory.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 1000);
+      setTimeout(()=>heart.remove(),6000);
+    }, 900);
   </script>
+
 </body>
 </html>
